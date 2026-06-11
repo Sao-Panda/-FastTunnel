@@ -1,0 +1,44 @@
+# API Tunnel 配置文件
+# 远程网关模式：部署在美国 VPS 上，绑定固定 IP 转发到上游 API
+
+gateway:
+  # 监听地址
+  listen_addr: ":8080"
+  # 出站流量绑定到的本地 IP（专用网卡 IP）
+  # bind_ip: "10.0.0.100"
+  # 或者绑定指定网卡名称
+  # bind_interface: "eth1"
+  # 超时设置
+  read_timeout: 30s
+  write_timeout: 60s
+  idle_timeout: 120s
+  # 重试
+  max_retries: 3
+  retry_delay: 500ms
+  # 认证令牌（客户端请求时需要带 Authorization: Bearer <token>）
+  # auth_token: "your-secret-token"
+  # HTTPS（可选）
+  # tls:
+  #   cert_file: /etc/ssl/cert.pem
+  #   key_file: /etc/ssl/key.pem
+
+upstream:
+  # 上游 API 地址
+  url: "https://api.example.com"
+  # 上游超时
+  timeout: 30s
+  # 保留原始 Host 头
+  preserve_host: false
+  # 允许转发的请求头（为空则全部转发）
+  # allowed_headers: ["Authorization", "Content-Type", "X-Request-Id"]
+  # 剥离这些请求头
+  strip_headers: ["X-Forwarded-For", "X-Real-IP"]
+  # 追加/覆盖请求头
+  set_headers:
+    X-Proxy: api-tunnel
+    X-Client-Source: dedicated-line
+
+log:
+  level: info
+  # file: /var/log/api-tunnel.log
+  format: json

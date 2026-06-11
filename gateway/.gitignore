@@ -1,0 +1,43 @@
+# Binaries
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+gateway
+api-tunnel
+
+# Test binary
+*.test
+
+# Go
+vendor/
+*.out
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build
+dist/
+build/
+desktop/build/bin/
+
+# Frontend
+desktop/frontend/node_modules/
+desktop/frontend/dist/
+
+# Logs
+*.log
+
+# Config (user-specific)
+config/config.local.yaml
+
+# Wails generated
+desktop/wailsjs/

@@ -1,0 +1,27 @@
+version: "3.9"
+
+services:
+  api-tunnel:
+    build:
+      context: .
+      dockerfile: deploy/Dockerfile
+    container_name: api-tunnel
+    restart: unless-stopped
+    ports:
+      - "${LISTEN_PORT:-8080}:8080"
+    volumes:
+      - ./config:/etc/api-tunnel:ro
+      - api-tunnel-logs:/var/log/api-tunnel
+    environment:
+      - TZ=Asia/Shanghai
+    networks:
+      - tunnel-net
+    # For dedicated NIC binding, use network_mode: host or macvlan
+    # network_mode: host
+
+volumes:
+  api-tunnel-logs:
+
+networks:
+  tunnel-net:
+    driver: bridge
