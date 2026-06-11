@@ -1,5 +1,6 @@
 // 速联 FastTunnel — 跨境专线代理
-// 运行: node fasttunnel.js
+// 运行: node server.js
+// 地址说明: 127.0.0.1 = 你的本机地址 = 所有服务跑在你自己电脑上
 
 const http = require('http');
 const https = require('https');
@@ -347,7 +348,7 @@ const mainServer = http.createServer((req, res) => {
 });
 
 mainServer.listen(MAIN_PORT, () => {
-  addLog('INFO', `速联 FastTunnel 管理面板: http://127.0.0.1:${MAIN_PORT}`);
-  addLog('INFO', `API: http://127.0.0.1:${MAIN_PORT}/api/`);
-  addLog('INFO', `就绪 — 浏览器打开 http://127.0.0.1:${MAIN_PORT}`);
+  addLog('INFO', `速联 FastTunnel 管理面板: 你的本机地址:${MAIN_PORT}`);
+  addLog('INFO', `API 接口: 你的本机地址:${MAIN_PORT}/api/`);
+  addLog('INFO', `就绪 — 所有地址属于使用者自己`);
 });
